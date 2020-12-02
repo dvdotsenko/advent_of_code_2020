@@ -16,14 +16,16 @@ def is_valid_password_sled_rental(min_cnt, max_cnt, ch, text):
     # print(min_cnt, max_cnt, ch, text)
     mi = int(min_cnt)
     ma = int(max_cnt)
-    cnt = defaultdict(int)
-    for l in text:
-        cnt[l] += 1
-    return cnt[ch] >= mi and cnt[ch] <= ma
+    # cnt = defaultdict(int)
+    # for l in text:
+    #     cnt[l] += 1
+    # return cnt[ch] >= mi and cnt[ch] <= ma
+    cnt = text.count(ch)
+    return cnt >= mi and cnt <= ma
 
 
 def is_valid_password_tobaggan(min_cnt, max_cnt, ch, text):
-    print(min_cnt, max_cnt, ch, text)
+    # print(min_cnt, max_cnt, ch, text)
     p1 = int(min_cnt) - 1
     p2 = int(max_cnt) - 1
     s = {text[p1], text[p2]}
