@@ -22,7 +22,7 @@ func (ce *ErrorListener) SyntaxError(
 }
 
 
-func Parse(s string) {
+func Parse(s string) interface{} {
 	io := antlr.NewInputStream(s)
 
 	lex := NewExpressionsLexer(io)
@@ -39,5 +39,5 @@ func Parse(s string) {
 
 	visitor := NewVisitor()
 	tree := p.TreeStart()
-	fmt.Println(visitor.Visit(tree))
+	return visitor.Visit(tree)
 }
