@@ -14,24 +14,23 @@ var _ = fmt.Printf
 var _ = reflect.Copy
 var _ = strconv.Itoa
 
-
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 12, 40, 4, 
-	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 3, 2, 3, 2, 3, 2, 3, 3, 5, 
-	3, 15, 10, 3, 3, 3, 3, 3, 3, 3, 6, 3, 20, 10, 3, 13, 3, 14, 3, 21, 3, 4, 
-	3, 4, 3, 4, 3, 4, 5, 4, 28, 10, 4, 5, 4, 30, 10, 4, 3, 4, 3, 4, 3, 4, 3, 
-	5, 6, 5, 36, 10, 5, 13, 5, 14, 5, 37, 3, 5, 2, 2, 6, 2, 4, 6, 8, 2, 4, 
-	3, 2, 5, 6, 3, 2, 9, 10, 2, 40, 2, 10, 3, 2, 2, 2, 4, 14, 3, 2, 2, 2, 6, 
-	29, 3, 2, 2, 2, 8, 35, 3, 2, 2, 2, 10, 11, 5, 4, 3, 2, 11, 12, 7, 2, 2, 
-	3, 12, 3, 3, 2, 2, 2, 13, 15, 5, 8, 5, 2, 14, 13, 3, 2, 2, 2, 14, 15, 3, 
-	2, 2, 2, 15, 16, 3, 2, 2, 2, 16, 17, 7, 6, 2, 2, 17, 19, 7, 7, 2, 2, 18, 
-	20, 5, 6, 4, 2, 19, 18, 3, 2, 2, 2, 20, 21, 3, 2, 2, 2, 21, 19, 3, 2, 2, 
-	2, 21, 22, 3, 2, 2, 2, 22, 5, 3, 2, 2, 2, 23, 24, 7, 3, 2, 2, 24, 30, 7, 
-	4, 2, 2, 25, 27, 7, 8, 2, 2, 26, 28, 5, 8, 5, 2, 27, 26, 3, 2, 2, 2, 27, 
-	28, 3, 2, 2, 2, 28, 30, 3, 2, 2, 2, 29, 23, 3, 2, 2, 2, 29, 25, 3, 2, 2, 
-	2, 30, 31, 3, 2, 2, 2, 31, 32, 9, 2, 2, 2, 32, 33, 9, 3, 2, 2, 33, 7, 3, 
-	2, 2, 2, 34, 36, 7, 11, 2, 2, 35, 34, 3, 2, 2, 2, 36, 37, 3, 2, 2, 2, 37, 
-	35, 3, 2, 2, 2, 37, 38, 3, 2, 2, 2, 38, 9, 3, 2, 2, 2, 7, 14, 21, 27, 29, 
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 12, 40, 4,
+	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 3, 2, 3, 2, 3, 2, 3, 3, 5,
+	3, 15, 10, 3, 3, 3, 3, 3, 3, 3, 6, 3, 20, 10, 3, 13, 3, 14, 3, 21, 3, 4,
+	3, 4, 3, 4, 3, 4, 5, 4, 28, 10, 4, 5, 4, 30, 10, 4, 3, 4, 3, 4, 3, 4, 3,
+	5, 6, 5, 36, 10, 5, 13, 5, 14, 5, 37, 3, 5, 2, 2, 6, 2, 4, 6, 8, 2, 4,
+	3, 2, 5, 6, 3, 2, 9, 10, 2, 40, 2, 10, 3, 2, 2, 2, 4, 14, 3, 2, 2, 2, 6,
+	29, 3, 2, 2, 2, 8, 35, 3, 2, 2, 2, 10, 11, 5, 4, 3, 2, 11, 12, 7, 2, 2,
+	3, 12, 3, 3, 2, 2, 2, 13, 15, 5, 8, 5, 2, 14, 13, 3, 2, 2, 2, 14, 15, 3,
+	2, 2, 2, 15, 16, 3, 2, 2, 2, 16, 17, 7, 6, 2, 2, 17, 19, 7, 7, 2, 2, 18,
+	20, 5, 6, 4, 2, 19, 18, 3, 2, 2, 2, 20, 21, 3, 2, 2, 2, 21, 19, 3, 2, 2,
+	2, 21, 22, 3, 2, 2, 2, 22, 5, 3, 2, 2, 2, 23, 24, 7, 3, 2, 2, 24, 30, 7,
+	4, 2, 2, 25, 27, 7, 8, 2, 2, 26, 28, 5, 8, 5, 2, 27, 26, 3, 2, 2, 2, 27,
+	28, 3, 2, 2, 2, 28, 30, 3, 2, 2, 2, 29, 23, 3, 2, 2, 2, 29, 25, 3, 2, 2,
+	2, 30, 31, 3, 2, 2, 2, 31, 32, 9, 2, 2, 2, 32, 33, 9, 3, 2, 2, 33, 7, 3,
+	2, 2, 2, 34, 36, 7, 11, 2, 2, 35, 34, 3, 2, 2, 2, 36, 37, 3, 2, 2, 2, 37,
+	35, 3, 2, 2, 2, 37, 38, 3, 2, 2, 2, 38, 9, 3, 2, 2, 2, 7, 14, 21, 27, 29,
 	37,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
@@ -41,7 +40,7 @@ var literalNames = []string{
 	"", "", "", "", "", "", "", "'.'", "','",
 }
 var symbolicNames = []string{
-	"", "K_NO", "K_OTHER", "K_BAG", "K_BAGS", "K_CONTAIN", "NUMERIC_LITERAL", 
+	"", "K_NO", "K_OTHER", "K_BAG", "K_BAGS", "K_CONTAIN", "NUMERIC_LITERAL",
 	"DOT", "COMMA", "ATOM", "WHITESPACE",
 }
 
@@ -76,25 +75,25 @@ func NewExpressionsParser(input antlr.TokenStream) *ExpressionsParser {
 
 // ExpressionsParser tokens.
 const (
-	ExpressionsParserEOF = antlr.TokenEOF
-	ExpressionsParserK_NO = 1
-	ExpressionsParserK_OTHER = 2
-	ExpressionsParserK_BAG = 3
-	ExpressionsParserK_BAGS = 4
-	ExpressionsParserK_CONTAIN = 5
+	ExpressionsParserEOF             = antlr.TokenEOF
+	ExpressionsParserK_NO            = 1
+	ExpressionsParserK_OTHER         = 2
+	ExpressionsParserK_BAG           = 3
+	ExpressionsParserK_BAGS          = 4
+	ExpressionsParserK_CONTAIN       = 5
 	ExpressionsParserNUMERIC_LITERAL = 6
-	ExpressionsParserDOT = 7
-	ExpressionsParserCOMMA = 8
-	ExpressionsParserATOM = 9
-	ExpressionsParserWHITESPACE = 10
+	ExpressionsParserDOT             = 7
+	ExpressionsParserCOMMA           = 8
+	ExpressionsParserATOM            = 9
+	ExpressionsParserWHITESPACE      = 10
 )
 
 // ExpressionsParser rules.
 const (
 	ExpressionsParserRULE_treeStart = 0
-	ExpressionsParserRULE_expr = 1
+	ExpressionsParserRULE_expr      = 1
 	ExpressionsParserRULE_component = 2
-	ExpressionsParserRULE_label = 3
+	ExpressionsParserRULE_label     = 3
 )
 
 // ITreeStartContext is an interface to support dynamic dispatch.
@@ -157,7 +156,6 @@ func (s *TreeStartContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *TreeStartContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -167,9 +165,6 @@ func (s *TreeStartContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 		return t.VisitChildren(s)
 	}
 }
-
-
-
 
 func (p *ExpressionsParser) TreeStart() (localctx ITreeStartContext) {
 	localctx = NewTreeStartContext(p, p.GetParserRuleContext(), p.GetState())
@@ -201,11 +196,8 @@ func (p *ExpressionsParser) TreeStart() (localctx ITreeStartContext) {
 		p.Match(ExpressionsParserEOF)
 	}
 
-
-
 	return localctx
 }
-
 
 // IExprContext is an interface to support dynamic dispatch.
 type IExprContext interface {
@@ -294,7 +286,6 @@ func (s *ExprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *ExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -305,14 +296,10 @@ func (s *ExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-
-
-
 func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 	localctx = NewExprContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 2, ExpressionsParserRULE_expr)
 	var _la int
-
 
 	defer func() {
 		p.ExitRule()
@@ -335,7 +322,6 @@ func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-
 	if _la == ExpressionsParserATOM {
 		{
 			p.SetState(11)
@@ -355,24 +341,19 @@ func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-
 	for ok := true; ok; ok = _la == ExpressionsParserK_NO || _la == ExpressionsParserNUMERIC_LITERAL {
 		{
 			p.SetState(16)
 			p.Component()
 		}
 
-
 		p.SetState(19)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
 
-
-
 	return localctx
 }
-
 
 // IComponentContext is an interface to support dynamic dispatch.
 type IComponentContext interface {
@@ -382,12 +363,10 @@ type IComponentContext interface {
 	GetParser() antlr.Parser
 
 	// GetCount returns the count token.
-	GetCount() antlr.Token 
-
+	GetCount() antlr.Token
 
 	// SetCount sets the count token.
-	SetCount(antlr.Token) 
-
+	SetCount(antlr.Token)
 
 	// IsComponentContext differentiates from other interfaces.
 	IsComponentContext()
@@ -396,7 +375,7 @@ type IComponentContext interface {
 type ComponentContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	count antlr.Token
+	count  antlr.Token
 }
 
 func NewEmptyComponentContext() *ComponentContext {
@@ -423,9 +402,7 @@ func (s *ComponentContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *ComponentContext) GetCount() antlr.Token { return s.count }
 
-
 func (s *ComponentContext) SetCount(v antlr.Token) { s.count = v }
-
 
 func (s *ComponentContext) K_BAGS() antlr.TerminalNode {
 	return s.GetToken(ExpressionsParserK_BAGS, 0)
@@ -473,7 +450,6 @@ func (s *ComponentContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *ComponentContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -484,14 +460,10 @@ func (s *ComponentContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-
-
-
 func (p *ExpressionsParser) Component() (localctx IComponentContext) {
 	localctx = NewComponentContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 4, ExpressionsParserRULE_component)
 	var _la int
-
 
 	defer func() {
 		p.ExitRule()
@@ -524,7 +496,6 @@ func (p *ExpressionsParser) Component() (localctx IComponentContext) {
 			p.Match(ExpressionsParserK_OTHER)
 		}
 
-
 	case ExpressionsParserNUMERIC_LITERAL:
 		{
 			p.SetState(23)
@@ -537,7 +508,6 @@ func (p *ExpressionsParser) Component() (localctx IComponentContext) {
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 
-
 		if _la == ExpressionsParserATOM {
 			{
 				p.SetState(24)
@@ -545,8 +515,6 @@ func (p *ExpressionsParser) Component() (localctx IComponentContext) {
 			}
 
 		}
-
-
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
@@ -574,11 +542,8 @@ func (p *ExpressionsParser) Component() (localctx IComponentContext) {
 		}
 	}
 
-
-
 	return localctx
 }
-
 
 // ILabelContext is an interface to support dynamic dispatch.
 type ILabelContext interface {
@@ -634,7 +599,6 @@ func (s *LabelContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) 
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *LabelContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -645,14 +609,10 @@ func (s *LabelContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-
-
-
 func (p *ExpressionsParser) Label() (localctx ILabelContext) {
 	localctx = NewLabelContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 6, ExpressionsParserRULE_label)
 	var _la int
-
 
 	defer func() {
 		p.ExitRule()
@@ -675,22 +635,16 @@ func (p *ExpressionsParser) Label() (localctx ILabelContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-
 	for ok := true; ok; ok = _la == ExpressionsParserATOM {
 		{
 			p.SetState(32)
 			p.Match(ExpressionsParserATOM)
 		}
 
-
 		p.SetState(35)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
 
-
-
 	return localctx
 }
-
-

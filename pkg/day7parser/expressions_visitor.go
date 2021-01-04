@@ -2,6 +2,7 @@
 
 package day7parser // Expressions
 import "github.com/antlr/antlr4/runtime/Go/antlr"
+
 // A complete Visitor for a parse tree produced by ExpressionsParser.
 type ExpressionsVisitor interface {
 	antlr.ParseTreeVisitor
@@ -17,5 +18,4 @@ type ExpressionsVisitor interface {
 
 	// Visit a parse tree produced by ExpressionsParser#label.
 	VisitLabel(ctx *LabelContext) interface{}
-
 }

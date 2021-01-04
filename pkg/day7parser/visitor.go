@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 type Visitor struct {
 	// This embed is redundant and is used only to express "inheritance" tree
 	// All methods from this and its parent must be reimplemented here at top level
@@ -34,13 +33,11 @@ func (v *Visitor) Visit(tree antlr.ParseTree) interface{} {
 // -----------------------------
 // Override BaseExpressionsVisitor
 
-
 func (v *Visitor) VisitTreeStart(ctx *TreeStartContext) interface{} {
 	//print("START\n")
 	//return v.VisitChildren(ctx)
 	return ctx.Expr().Accept(v)
 }
-
 
 type Component struct {
 	Count int64
@@ -48,10 +45,9 @@ type Component struct {
 }
 
 type Expr struct {
-	Label string
-	Equivalences []Component
+	Label      string
+	Components []Component
 }
-
 
 func (v *Visitor) VisitExpr(ctx *ExprContext) interface{} {
 	//return v.VisitChildren(ctx)
@@ -69,7 +65,6 @@ func (v *Visitor) VisitExpr(ctx *ExprContext) interface{} {
 		cc,
 	}
 }
-
 
 func (v *Visitor) VisitComponent(ctx *ComponentContext) interface{} {
 	//return v.VisitChildren(ctx)
@@ -91,7 +86,6 @@ func (v *Visitor) VisitComponent(ctx *ComponentContext) interface{} {
 	}
 }
 
-
 func (v *Visitor) VisitLabel(ctx *LabelContext) interface{} {
 	//return v.VisitChildren(ctx)
 	ss := []string{}
@@ -100,7 +94,6 @@ func (v *Visitor) VisitLabel(ctx *LabelContext) interface{} {
 	}
 	return strings.Join(ss, " ")
 }
-
 
 func NewVisitor() Visitor {
 	return Visitor{
