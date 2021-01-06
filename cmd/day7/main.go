@@ -71,7 +71,6 @@ const EmptyString = ""
 //	fmt.Printf("%v, %v", len(cc), cc)
 //}
 
-
 func SumValues(s string, mm map[string]map[string]int64) int64 {
 	var cc int64 = 1
 	m := mm[s]
@@ -80,7 +79,6 @@ func SumValues(s string, mm map[string]map[string]int64) int64 {
 	}
 	return cc
 }
-
 
 func main() {
 	lines := fio.FileAsLines(FN)

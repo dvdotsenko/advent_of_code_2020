@@ -11,14 +11,11 @@ import (
 
 const FN string = "cmd/day4/data.txt"
 
-
 type RecordData map[string]string
 
-
-func doNothing (s string) bool {
+func doNothing(s string) bool {
 	return true
 }
-
 
 func validateNumber(s string, min int64, max int64) bool {
 	v, err := strconv.ParseInt(s, 10, 64)
@@ -32,9 +29,8 @@ func validateNumber(s string, min int64, max int64) bool {
 	}
 }
 
-
 var _hairColors = map[string]interface{}{
-	"amb":nil,"blu":nil,"brn":nil,"gry":nil,"grn":nil,"hzl":nil,"oth":nil,
+	"amb": nil, "blu": nil, "brn": nil, "gry": nil, "grn": nil, "hzl": nil, "oth": nil,
 }
 
 func validateEyeColor(s string) bool {
@@ -42,23 +38,18 @@ func validateEyeColor(s string) bool {
 	return there
 }
 
-
 var hairColor = regexp.MustCompile(`^#[a-f0-9]{6}$`)
 var validPassportID = regexp.MustCompile(`^[0-9]{9}$`)
-
 
 func validatePassport(s string) bool {
 	return validPassportID.MatchString(s)
 }
 
-
 func validateHair(s string) bool {
 	return hairColor.MatchString(s)
 }
 
-
 var gg = regexp.MustCompile(`^(\d+)(cm|in)$`)
-
 
 func validateHeight(s string) bool {
 	// If cm, the number must be at least 150 and at most 193.
@@ -77,18 +68,16 @@ func validateHeight(s string) bool {
 	return false
 }
 
-
-var FIELD_VALIDATOR_MAP = map[string]func(string)bool{
-	"byr": func (s string) bool {return validateNumber(s, 1920, 2002)}, // (Birth Year)
+var FIELD_VALIDATOR_MAP = map[string]func(string) bool{
+	"byr": func(s string) bool { return validateNumber(s, 1920, 2002) }, // (Birth Year)
 	//"cid", // (Country ID)
-	"ecl": validateEyeColor, // (Eye Color)
-	"eyr": func (s string) bool {return validateNumber(s, 2020, 2030)}, // (Expiration Year)
-	"hcl": validateHair, // (Hair Color)
-	"hgt": validateHeight, // (Height)
-	"iyr": func (s string) bool {return validateNumber(s, 2010, 2020)}, // (Issue Year)
-	"pid": validatePassport, // (Passport ID)
+	"ecl": validateEyeColor,                                             // (Eye Color)
+	"eyr": func(s string) bool { return validateNumber(s, 2020, 2030) }, // (Expiration Year)
+	"hcl": validateHair,                                                 // (Hair Color)
+	"hgt": validateHeight,                                               // (Height)
+	"iyr": func(s string) bool { return validateNumber(s, 2010, 2020) }, // (Issue Year)
+	"pid": validatePassport,                                             // (Passport ID)
 }
-
 
 func parseRecord(s string) RecordData {
 	record := map[string]string{}
@@ -102,10 +91,9 @@ func parseRecord(s string) RecordData {
 	return record
 }
 
-
-func getRecords (fileLines chan string) chan RecordData {
+func getRecords(fileLines chan string) chan RecordData {
 	var records = make(chan RecordData, 1)
-	go func () {
+	go func() {
 		var parts []string
 		for line := range fileLines {
 			if line == "" {
@@ -120,7 +108,6 @@ func getRecords (fileLines chan string) chan RecordData {
 	return records
 }
 
-
 func recordIsValid(r RecordData) bool {
 	for k, validate := range FIELD_VALIDATOR_MAP {
 		v, there := r[k]
@@ -133,7 +120,6 @@ func recordIsValid(r RecordData) bool {
 	}
 	return true
 }
-
 
 func main() {
 	lines := fio.FileAsLines(FN)

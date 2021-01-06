@@ -14,12 +14,11 @@ var _ = fmt.Printf
 var _ = reflect.Copy
 var _ = strconv.Itoa
 
-
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 13, 13, 4, 
-	2, 9, 2, 4, 3, 9, 3, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 4, 
-	2, 4, 2, 3, 3, 2, 3, 5, 2, 10, 2, 6, 3, 2, 2, 2, 4, 9, 3, 2, 2, 2, 6, 7, 
-	5, 4, 3, 2, 7, 8, 7, 2, 2, 3, 8, 3, 3, 2, 2, 2, 9, 10, 9, 2, 2, 2, 10, 
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 13, 13, 4,
+	2, 9, 2, 4, 3, 9, 3, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 4,
+	2, 4, 2, 3, 3, 2, 3, 5, 2, 10, 2, 6, 3, 2, 2, 2, 4, 9, 3, 2, 2, 2, 6, 7,
+	5, 4, 3, 2, 7, 8, 7, 2, 2, 3, 8, 3, 3, 2, 2, 2, 9, 10, 9, 2, 2, 2, 10,
 	11, 7, 6, 2, 2, 11, 5, 3, 2, 2, 2, 2,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
@@ -29,7 +28,7 @@ var literalNames = []string{
 	"", "", "", "", "", "", "'+'", "'-'", "'.'", "','",
 }
 var symbolicNames = []string{
-	"", "K_JMP", "K_ACC", "K_NOOP", "SIGNED_NUMERIC_LITERAL", "NUMERIC_LITERAL", 
+	"", "K_JMP", "K_ACC", "K_NOOP", "SIGNED_NUMERIC_LITERAL", "NUMERIC_LITERAL",
 	"PLUS", "MINUS", "DOT", "COMMA", "ATOM", "WHITESPACE",
 }
 
@@ -64,24 +63,24 @@ func NewExpressionsParser(input antlr.TokenStream) *ExpressionsParser {
 
 // ExpressionsParser tokens.
 const (
-	ExpressionsParserEOF = antlr.TokenEOF
-	ExpressionsParserK_JMP = 1
-	ExpressionsParserK_ACC = 2
-	ExpressionsParserK_NOOP = 3
+	ExpressionsParserEOF                    = antlr.TokenEOF
+	ExpressionsParserK_JMP                  = 1
+	ExpressionsParserK_ACC                  = 2
+	ExpressionsParserK_NOOP                 = 3
 	ExpressionsParserSIGNED_NUMERIC_LITERAL = 4
-	ExpressionsParserNUMERIC_LITERAL = 5
-	ExpressionsParserPLUS = 6
-	ExpressionsParserMINUS = 7
-	ExpressionsParserDOT = 8
-	ExpressionsParserCOMMA = 9
-	ExpressionsParserATOM = 10
-	ExpressionsParserWHITESPACE = 11
+	ExpressionsParserNUMERIC_LITERAL        = 5
+	ExpressionsParserPLUS                   = 6
+	ExpressionsParserMINUS                  = 7
+	ExpressionsParserDOT                    = 8
+	ExpressionsParserCOMMA                  = 9
+	ExpressionsParserATOM                   = 10
+	ExpressionsParserWHITESPACE             = 11
 )
 
 // ExpressionsParser rules.
 const (
 	ExpressionsParserRULE_treeStart = 0
-	ExpressionsParserRULE_expr = 1
+	ExpressionsParserRULE_expr      = 1
 )
 
 // ITreeStartContext is an interface to support dynamic dispatch.
@@ -144,7 +143,6 @@ func (s *TreeStartContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *TreeStartContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -154,9 +152,6 @@ func (s *TreeStartContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 		return t.VisitChildren(s)
 	}
 }
-
-
-
 
 func (p *ExpressionsParser) TreeStart() (localctx ITreeStartContext) {
 	localctx = NewTreeStartContext(p, p.GetParserRuleContext(), p.GetState())
@@ -188,11 +183,8 @@ func (p *ExpressionsParser) TreeStart() (localctx ITreeStartContext) {
 		p.Match(ExpressionsParserEOF)
 	}
 
-
-
 	return localctx
 }
-
 
 // IExprContext is an interface to support dynamic dispatch.
 type IExprContext interface {
@@ -202,18 +194,16 @@ type IExprContext interface {
 	GetParser() antlr.Parser
 
 	// GetOp returns the op token.
-	GetOp() antlr.Token 
+	GetOp() antlr.Token
 
 	// GetNum returns the num token.
-	GetNum() antlr.Token 
-
+	GetNum() antlr.Token
 
 	// SetOp sets the op token.
-	SetOp(antlr.Token) 
+	SetOp(antlr.Token)
 
 	// SetNum sets the num token.
-	SetNum(antlr.Token) 
-
+	SetNum(antlr.Token)
 
 	// IsExprContext differentiates from other interfaces.
 	IsExprContext()
@@ -222,8 +212,8 @@ type IExprContext interface {
 type ExprContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	op antlr.Token
-	num antlr.Token
+	op     antlr.Token
+	num    antlr.Token
 }
 
 func NewEmptyExprContext() *ExprContext {
@@ -252,11 +242,9 @@ func (s *ExprContext) GetOp() antlr.Token { return s.op }
 
 func (s *ExprContext) GetNum() antlr.Token { return s.num }
 
-
 func (s *ExprContext) SetOp(v antlr.Token) { s.op = v }
 
 func (s *ExprContext) SetNum(v antlr.Token) { s.num = v }
-
 
 func (s *ExprContext) SIGNED_NUMERIC_LITERAL() antlr.TerminalNode {
 	return s.GetToken(ExpressionsParserSIGNED_NUMERIC_LITERAL, 0)
@@ -282,7 +270,6 @@ func (s *ExprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-
 func (s *ExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case ExpressionsVisitor:
@@ -293,14 +280,10 @@ func (s *ExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-
-
-
 func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 	localctx = NewExprContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 2, ExpressionsParserRULE_expr)
 	var _la int
-
 
 	defer func() {
 		p.ExitRule()
@@ -328,7 +311,7 @@ func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 
 		_la = p.GetTokenStream().LA(1)
 
-		if !((((_la) & -(0x1f+1)) == 0 && ((1 << uint(_la)) & ((1 << ExpressionsParserK_JMP) | (1 << ExpressionsParserK_ACC) | (1 << ExpressionsParserK_NOOP))) != 0)) {
+		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<ExpressionsParserK_JMP)|(1<<ExpressionsParserK_ACC)|(1<<ExpressionsParserK_NOOP))) != 0) {
 			var _ri = p.GetErrorHandler().RecoverInline(p)
 
 			localctx.(*ExprContext).op = _ri
@@ -345,9 +328,5 @@ func (p *ExpressionsParser) Expr() (localctx IExprContext) {
 		localctx.(*ExprContext).num = _m
 	}
 
-
-
 	return localctx
 }
-
-

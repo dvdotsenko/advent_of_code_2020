@@ -39,7 +39,7 @@ func (v *Visitor) VisitTreeStart(ctx *TreeStartContext) interface{} {
 }
 
 type Expr struct {
-	Op string
+	Op    string
 	Value int64
 }
 
@@ -58,7 +58,6 @@ func (v *Visitor) VisitExpr(ctx *ExprContext) interface{} {
 		cnt,
 	}
 }
-
 
 func NewVisitor() Visitor {
 	return Visitor{

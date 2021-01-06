@@ -12,9 +12,9 @@ import (
 
 const FN string = "cmd/day5/data.txt"
 
-
 var rows = [128]int{}
 var seats = [8]int{}
+
 func init() {
 	for i := range rows {
 		rows[i] = i
@@ -29,29 +29,26 @@ func pickLower(s []int) []int {
 	return s[:l/2]
 }
 
-
 func pickUpper(s []int) []int {
 	l := len(s)
 	return s[l/2:]
 }
 
-var FIELD_PICKER_MAP = map[rune]func([]int)[]int{
+var FIELD_PICKER_MAP = map[rune]func([]int) []int{
 	'F': pickLower,
 	'L': pickLower,
 	'B': pickUpper,
 	'R': pickUpper,
 }
 
-
 type RecordData struct {
-	rowSteps string
+	rowSteps  string
 	seatSteps string
 }
 
-
-func getRecords (fileLines chan string) chan RecordData {
+func getRecords(fileLines chan string) chan RecordData {
 	var records = make(chan RecordData, 1)
-	go func () {
+	go func() {
 		for line := range fileLines {
 			if len(line) == 10 {
 				records <- RecordData{
@@ -64,7 +61,6 @@ func getRecords (fileLines chan string) chan RecordData {
 	}()
 	return records
 }
-
 
 func convertRecordToSeatIndex(r RecordData) int {
 	var s []int
@@ -85,7 +81,7 @@ func convertRecordToSeatIndex(r RecordData) int {
 	seat_num := s[0]
 	//fmt.Print("Seat number ", seat_num, "\n")
 
-	return row_num * 8 + seat_num
+	return row_num*8 + seat_num
 }
 
 func main() {
@@ -100,7 +96,7 @@ func main() {
 		fmt.Print(">  ", record, seatIndex, " ", maxSeatIndex, "\n")
 		seatUsedMap[seatIndex] = true
 	}
-	for i := 0; i < 1024; i += 1{
+	for i := 0; i < 1024; i += 1 {
 		if _, there := seatUsedMap[i]; !there {
 			fmt.Printf("Missing Seat: %v\n", i)
 		}

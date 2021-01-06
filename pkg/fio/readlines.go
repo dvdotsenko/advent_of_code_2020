@@ -47,16 +47,14 @@ func FileAsLines(fn string) (lines chan string) {
 	return lines
 }
 
-
 func ToFile(bb []byte, fn string) {
 	fp, err := os.Create(fn)
 	if err != nil {
-	    panic(err)
+		panic(err)
 	}
 	defer fp.Close()
 	fp.Write(bb)
 }
-
 
 func FromFile(fn string) []byte {
 	fp, err := os.Open(fn)
@@ -66,7 +64,7 @@ func FromFile(fn string) []byte {
 	defer fp.Close()
 	bb, err := ioutil.ReadAll(fp)
 	if err != nil {
-	    panic(err)
+		panic(err)
 	}
 	return bb
 }

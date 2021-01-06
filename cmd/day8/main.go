@@ -12,20 +12,18 @@ import (
 const FN string = "cmd/day8/data.txt"
 
 type Any = interface{}
+
 const EmptyString = ""
 
-
 const (
-	ACC = "acc"
-	JMP = "jmp"
-	NOP = "nop"
+	ACC  = "acc"
+	JMP  = "jmp"
+	NOP  = "nop"
 	STOP = "stop"
 )
 
-
 var LoopError = errors.New("Infinite Loop")
 var OutOfBoundsError = errors.New("Out of Bounds")
-
 
 func CheckAlgo(ops []day8parser.Expr) (int64, error, map[int64]bool) {
 	var op day8parser.Expr
@@ -61,7 +59,6 @@ func CheckAlgo(ops []day8parser.Expr) (int64, error, map[int64]bool) {
 	}
 }
 
-
 func FlipOp(i int, ops []day8parser.Expr) []day8parser.Expr {
 	new_ops := make([]day8parser.Expr, len(ops))
 	l := copy(new_ops, ops)
@@ -83,7 +80,6 @@ func FlipOp(i int, ops []day8parser.Expr) []day8parser.Expr {
 	}
 	return new_ops
 }
-
 
 func main() {
 	lines := fio.FileAsLines(FN)
@@ -114,7 +110,7 @@ func main() {
 	print("Analyzing the issue...\n")
 	ii := make([]int, 0, len(ops))
 	for i := range seen {
-		if op:=ops[i] ; op.Op == NOP || op.Op == JMP {
+		if op := ops[i]; op.Op == NOP || op.Op == JMP {
 			ii = append(ii, int(i))
 		}
 	}
